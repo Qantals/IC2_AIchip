@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module ram_mux #(
     parameter MODE_DATA = 0,
     parameter MODE_WEIGHT = 1

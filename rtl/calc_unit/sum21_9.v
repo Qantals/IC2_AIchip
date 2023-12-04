@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module sum21_9 (
     input signed [20:0] expand0,
     input signed [20:0] expand1,

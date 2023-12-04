@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module compress12 (
     input signed [11:0] sum,
     output signed [7:0] compress

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module max8_4 (
     input signed [7:0] conv0,
     input signed [7:0] conv1,

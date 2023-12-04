@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module dot8_9 (
     input signed [7:0] data0,
     input signed [7:0] data1,

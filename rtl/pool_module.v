@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module pool_module (
     // input clk,
     // input rst_n,

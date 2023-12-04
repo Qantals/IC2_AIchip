@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module data_ram (
     input clk,
     input wen,

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module weight_ram (
     input clk,
     input wen,
