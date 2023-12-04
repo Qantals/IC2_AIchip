@@ -31,9 +31,9 @@ module top_tb;
     integer index_data,index_weight;
     integer i;
     initial begin
-        $readmemb("../sample/data.txt",data_mem);
-        $readmemb("../sample/weight.txt",weight_mem);
-        $readmemb("../sample/output.txt",output_mem);
+        $readmemb("../sample_100/data.txt",data_mem);
+        $readmemb("../sample_100/weight.txt",weight_mem);
+        $readmemb("../sample_100/output.txt",output_mem);
     end
 
     initial begin

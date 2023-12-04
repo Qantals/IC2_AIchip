@@ -12,7 +12,7 @@ module connect_module (
     // get dot product
     wire [3*3*3*16-1:0] dot_ans;
     generate
-        for(d = 0; d <= 2; d = d + 1) begin
+        for(d = 0; d <= 2; d = d + 1) begin:block_connect_dot8_9
             dot8_9 u_dot8_9(
                 .data0(pool_lin[(d*9  )*8  +:8]),
                 .data1(pool_lin[(d*9+1)*8 +: 8]),
@@ -51,7 +51,7 @@ module connect_module (
     // signed expand width
     wire [3*3*3*21-1:0] expand_ans;
     generate
-        for(j = 0; j <= 3*3*3-1; j = j + 1) begin
+        for(j = 0; j <= 3*3*3-1; j = j + 1) begin:block_connect_expand21
             expand21 u_expand21(
                 .dot(dot_ans[j*16 +: 16]),
                 .expand(expand_ans[j*21 +: 21])
@@ -65,7 +65,7 @@ module connect_module (
     // get sum of 3*3*3->1*1*3
     wire [1*1*3*21-1:0] sum3_ans;
     generate
-        for(j = 0; j <= 1*1*3-1; j = j + 1) begin
+        for(j = 0; j <= 1*1*3-1; j = j + 1) begin:block_connect_sum21_9
             sum21_9 u_sum21_9(
                 .expand0(expand_ans[(j*9  )*21 +: 21]),
                 .expand1(expand_ans[(j*9+1)*21 +: 21]),

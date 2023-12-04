@@ -11,9 +11,9 @@ module pool_module (
     wire [3*3*3*8-1:0] max_ans;
     generate
         // r,c are coordinates of the left upper element
-        for(d = 0; d <= 2; d = d + 1) begin
-            for(r = 0; r <= 2; r = r + 1) begin
-                for(c = 0; c <= 2; c = c + 1) begin
+        for(d = 0; d <= 2; d = d + 1) begin:block_pool_max8_4_d
+            for(r = 0; r <= 2; r = r + 1) begin:block_pool_max8_4_r
+                for(c = 0; c <= 2; c = c + 1) begin:block_pool_max8_4_c
                     // one for 2x2 matrix pool
                     max8_4 u_max8_4(
                         .conv0(conv_lin[(d*6*6+(r*6+c)*2  )*8 +: 8]),

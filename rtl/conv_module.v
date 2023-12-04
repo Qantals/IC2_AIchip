@@ -14,9 +14,9 @@ module conv_module (
     wire [6*6*3*3*3*16-1:0] dot_ans;
     generate
         // r,c are coordinates of the left upper element
-        for(d = 0; d <= 2; d = d + 1) begin
-            for(r = 0; r <= 5; r = r + 1) begin
-                for(c = 0; c <= 5; c = c + 1) begin
+        for(d = 0; d <= 2; d = d + 1) begin:block_conv_dot8_9_d
+            for(r = 0; r <= 5; r = r + 1) begin:block_conv_dot8_9_r
+                for(c = 0; c <= 5; c = c + 1) begin:block_conv_dot8_9_c
                     // one for 3x3 matrix dot product
                     dot8_9 u_dot8_9(
                         .data0(data_lin[(r*8+c   )*8 +: 8]),
@@ -58,7 +58,7 @@ module conv_module (
     // signed expand width
     wire [6*6*3*3*3*20-1:0] expand_ans;
     generate
-        for(j = 0; j <= 6*6*3*3*3-1; j = j + 1) begin
+        for(j = 0; j <= 6*6*3*3*3-1; j = j + 1) begin:block_conv_expand20
             expand20 u_expand20(
                 .dot(dot_ans[j*16 +: 16]),
                 .expand(expand_ans[j*20 +: 20])
@@ -91,7 +91,7 @@ module conv_module (
     //     end
     // endgenerate
     generate
-        for(j = 0; j <= 6*6*3-1; j = j + 1) begin
+        for(j = 0; j <= 6*6*3-1; j = j + 1) begin:block_conv_sum20_9
             sum20_9 u_sum20_9(
                 .expand0(expand_ans[(j*9  )*20 +: 20]),
                 .expand1(expand_ans[(j*9+1)*20 +: 20]),
@@ -111,7 +111,7 @@ module conv_module (
     // compress every bit
     wire [6*6*3*8-1:0] compress_ans;
     generate
-        for(j = 0; j <= 6*6*3-1; j = j + 1) begin
+        for(j = 0; j <= 6*6*3-1; j = j + 1) begin:block_conv_compress12
             compress12 u_compress12(
                 .sum(sum_ans[(j*20+8) +: 12]),
                 .compress(compress_ans[j*8 +: 8])
