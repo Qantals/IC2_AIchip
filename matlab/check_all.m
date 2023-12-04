@@ -1,8 +1,8 @@
 for i=1:100 % get 100 pictures
 %% open document
-fdata=fopen('./data.txt','r');
-fweight=fopen('./weight.txt','r');
-foutput=fopen('./output.txt','r');
+fdata=fopen('./sample/data.txt','r');
+fweight=fopen('./sample/weight.txt','r');
+foutput=fopen('./sample/output.txt','r');
 
 %% get original data
 C_data=textscan(fdata,'%bs8');
