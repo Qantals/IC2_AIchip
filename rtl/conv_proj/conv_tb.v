@@ -39,16 +39,19 @@ module conv_tb;
         for(i_w = 0; i_w <= 3*3*3-1; i_w = i_w + 1) begin
             weight_lin[i_w*8 +: 8] = weight_mem[i_w];
         end
+        rst_n = 0;
+        in_vld = 0;
+        #6;
+        rst_n = 1;
+        // get started
         for(i_pic = 0; i_pic <= 100-1; i_pic = i_pic + 1) begin
-            rst_n = 0;
-            in_vld = 0;
+
             for(i_d = 0; i_d <= 8*8*1-1; i_d = i_d + 1) begin
                 data_lin[i_d*8 +: 8] = data_mem[i_pic*8*8+i_d];
             end
-            #6;
-            rst_n = 1;
             in_vld = 1;
-            @(posedge out_vld);   // depend on your logic delay
+            // wait for calculation
+            @(posedge out_vld);
             #1;
             for(i_c = 0; i_c <= 6*6*3-1; i_c = i_c + 1) begin
                 if(conv_mem[i_pic*6*6*3+i_c] != conv_lin[i_c*8 +: 8]) begin
@@ -56,8 +59,6 @@ module conv_tb;
                     fail_sign = 1;
                 end
             end
-            @(negedge clk);
-            #50;
         end
         if(fail_sign == 0)
             $display("check OK.");

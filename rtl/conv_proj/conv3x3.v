@@ -27,23 +27,25 @@ module conv3x3 (
     output signed [7:0] ans
 );
 
-
-    reg signed [15:0] product;
+    reg signed [7:0] mul1,mul2;
     always @(*) begin
         case (cnt)
-            0: product = data0 * weight0;
-            1: product = data1 * weight1;
-            2: product = data2 * weight2;
-            3: product = data3 * weight3;
-            4: product = data4 * weight4;
-            5: product = data5 * weight5;
-            6: product = data6 * weight6;
-            7: product = data7 * weight7;
-            8: product = data8 * weight8;
-            9: product = 0;
-            default: product = 0;
+            0: begin mul1 = data0; mul2 = weight0; end
+            1: begin mul1 = data1; mul2 = weight1; end
+            2: begin mul1 = data2; mul2 = weight2; end
+            3: begin mul1 = data3; mul2 = weight3; end
+            4: begin mul1 = data4; mul2 = weight4; end
+            5: begin mul1 = data5; mul2 = weight5; end
+            6: begin mul1 = data6; mul2 = weight6; end
+            7: begin mul1 = data7; mul2 = weight7; end
+            8: begin mul1 = data8; mul2 = weight8; end
+            9: begin mul1 = 0;     mul2 = 0;       end
+            default: begin mul1 = 0; mul2 = 0;     end
         endcase
     end
+    wire signed [15:0] product;
+    assign product = mul1 * mul2;
+
 
     reg signed [19:0] sum_accum;
     wire signed [19:0] nxt_sum;
