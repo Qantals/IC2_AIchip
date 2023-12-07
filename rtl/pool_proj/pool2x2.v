@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module max8_4 (
+module pool2x2(
     input signed [7:0] conv0,
     input signed [7:0] conv1,
     input signed [7:0] conv2,
@@ -7,6 +7,7 @@ module max8_4 (
 
     output signed [7:0] max
 );
+
     wire signed [7:0] cmp1;
     wire signed [7:0] cmp2;
 

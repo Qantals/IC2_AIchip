@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module conv3x3_cnt #(
+module connect3x3_cnt #(
     parameter CNT_MAX = 9
 )(
     input clk,
@@ -18,11 +18,19 @@ module conv3x3_cnt #(
             else
                 cnt <= cnt + 1;
         end
-        else
-            cnt <= 0;
     end
 
     assign out_vld = (cnt == CNT_MAX);
+    // always @(posedge clk, negedge rst_n) begin
+    //     if(~rst_n)
+    //         out_vld <= 0;
+    //     else begin
+    //         if(in_vld && cnt == CNT_MAX)
+    //             out_vld <= 1;
+    //         else if(in_vld)
+    //             out_vld <= 0;
+    //     end
+    // end
 
 
 endmodule

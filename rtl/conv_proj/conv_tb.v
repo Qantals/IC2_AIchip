@@ -59,6 +59,10 @@ module conv_tb;
                     fail_sign = 1;
                 end
             end
+            in_vld = 0;
+            @(posedge clk);
+            @(posedge clk);
+            #1;
         end
         if(fail_sign == 0)
             $display("check OK.");
