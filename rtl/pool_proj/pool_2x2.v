@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module pool2x2(
+module pool_2x2(
     input signed [7:0] conv0,
     input signed [7:0] conv1,
     input signed [7:0] conv2,
@@ -8,12 +8,12 @@ module pool2x2(
     output signed [7:0] max
 );
 
+    // use mux X3, compare X3
     wire signed [7:0] cmp1;
     wire signed [7:0] cmp2;
-
     assign cmp1 = (conv0 > conv1) ? conv0 : conv1;
     assign cmp2 = (conv2 > conv3) ? conv2 : conv3;
-
     assign max = (cmp1 > cmp2) ? cmp1 : cmp2;
+
 
 endmodule

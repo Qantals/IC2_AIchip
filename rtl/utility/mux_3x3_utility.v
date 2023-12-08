@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module conv3x3_mux_data (
+module mux_3x3_utility (
     input [3:0] cnt,
 
     input [7:0] data0,

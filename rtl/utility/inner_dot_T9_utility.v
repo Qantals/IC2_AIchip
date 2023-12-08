@@ -1,26 +1,27 @@
 `timescale 1ns/1ps
-module connect3x3 (
+module inner_dot_T9_utility #(
+    parameter SUM_WIDTH = 20
+)(
     input clk,
     input rst_n,
-    input [3:0] cnt,
-
+    input accum_clr,
     input signed [7:0] data,
     input signed [7:0] weight,
-    output signed [20:0] ans
+    output signed [SUM_WIDTH-1:0] ans
 );
 
     wire signed [15:0] product;
     assign product = data * weight;
 
 
-    reg signed [20:0] sum_accum;
-    wire signed [20:0] nxt_sum;
-    assign nxt_sum = (cnt == 0) ? (0 + product) : (sum_accum + product);
+    reg signed [SUM_WIDTH-1:0] sum_accum;
     always @(posedge clk, negedge rst_n) begin
         if(~rst_n)
             sum_accum <= 0;
+        else if(accum_clr)  // cnt == 0
+            sum_accum <= product;
         else
-            sum_accum <= nxt_sum;
+            sum_accum <= sum_accum + product;
     end
 
     // assign ans = ($signed(sum_accum[19:8]) > 127) ? 8'd127 : (($signed(sum_accum[19:8]) < -128) ? -8'd128 : $signed(sum_accum[15:8]));

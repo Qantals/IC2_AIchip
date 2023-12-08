@@ -1,11 +1,12 @@
 `timescale 1ns/1ps
-module connect3x3_cnt #(
+module counter_utility #(
+    parameter CNT_WIDTH = 4,
     parameter CNT_MAX = 9
 )(
     input clk,
     input rst_n,
     input in_vld,
-    output reg [3:0] cnt,
+    output reg [CNT_WIDTH-1:0] cnt,
     output out_vld
 );
 
@@ -21,16 +22,6 @@ module connect3x3_cnt #(
     end
 
     assign out_vld = (cnt == CNT_MAX);
-    // always @(posedge clk, negedge rst_n) begin
-    //     if(~rst_n)
-    //         out_vld <= 0;
-    //     else begin
-    //         if(in_vld && cnt == CNT_MAX)
-    //             out_vld <= 1;
-    //         else if(in_vld)
-    //             out_vld <= 0;
-    //     end
-    // end
 
 
 endmodule
