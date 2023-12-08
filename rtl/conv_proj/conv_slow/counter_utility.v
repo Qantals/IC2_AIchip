@@ -1,11 +1,12 @@
 `timescale 1ns/1ps
-module conv3x3_cnt #(
+module counter_utility #(
+    parameter CNT_WIDTH = 4,
     parameter CNT_MAX = 9
 )(
     input clk,
     input rst_n,
     input in_vld,
-    output reg [3:0] cnt,
+    output reg [CNT_WIDTH-1:0] cnt,
     output out_vld
 );
 
@@ -18,8 +19,6 @@ module conv3x3_cnt #(
             else
                 cnt <= cnt + 1;
         end
-        else
-            cnt <= 0;
     end
 
     assign out_vld = (cnt == CNT_MAX);

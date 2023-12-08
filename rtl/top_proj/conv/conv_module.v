@@ -56,20 +56,39 @@ module conv_module (
     wire [7:0] ans_3x3_D1;
     wire [7:0] ans_3x3_D2;
     wire [7:0] ans_3x3_D3;
+
+    wire [7:0] data0,data1,data2,data3,data4,data5,data6,data7,data8;
+    conv_mux u_conv_mux(
+        .r_cnt(r_cnt),
+        .c_cnt(c_cnt),
+        .data_lin(data_lin),
+
+        .data0(data0),
+        .data1(data1),
+        .data2(data2),
+        .data3(data3),
+        .data4(data4),
+        .data5(data5),
+        .data6(data6),
+        .data7(data7),
+        .data8(data8)
+    );
+
+
     conv3x3 u_conv3x3_D1(
         .clk(clk),
         .rst_n(rst_n),
         .cnt(cnt_3x3),
 
-        .data0(data_lin[(r_cnt*8+c_cnt   )*8 +: 8]),
-        .data1(data_lin[(r_cnt*8+c_cnt+1 )*8 +: 8]),
-        .data2(data_lin[(r_cnt*8+c_cnt+2 )*8 +: 8]),
-        .data3(data_lin[(r_cnt*8+c_cnt+8 )*8 +: 8]),
-        .data4(data_lin[(r_cnt*8+c_cnt+9 )*8 +: 8]),
-        .data5(data_lin[(r_cnt*8+c_cnt+10)*8 +: 8]),
-        .data6(data_lin[(r_cnt*8+c_cnt+16)*8 +: 8]),
-        .data7(data_lin[(r_cnt*8+c_cnt+17)*8 +: 8]),
-        .data8(data_lin[(r_cnt*8+c_cnt+18)*8 +: 8]),
+        .data0(data0),
+        .data1(data1),
+        .data2(data2),
+        .data3(data3),
+        .data4(data4),
+        .data5(data5),
+        .data6(data6),
+        .data7(data7),
+        .data8(data8),
 
         .weight0(weight_lin[(0*9  )*8 +: 8]),
         .weight1(weight_lin[(0*9+1)*8 +: 8]),
@@ -88,15 +107,15 @@ module conv_module (
         .rst_n(rst_n),
         .cnt(cnt_3x3),
 
-        .data0(data_lin[(r_cnt*8+c_cnt   )*8 +: 8]),
-        .data1(data_lin[(r_cnt*8+c_cnt+1 )*8 +: 8]),
-        .data2(data_lin[(r_cnt*8+c_cnt+2 )*8 +: 8]),
-        .data3(data_lin[(r_cnt*8+c_cnt+8 )*8 +: 8]),
-        .data4(data_lin[(r_cnt*8+c_cnt+9 )*8 +: 8]),
-        .data5(data_lin[(r_cnt*8+c_cnt+10)*8 +: 8]),
-        .data6(data_lin[(r_cnt*8+c_cnt+16)*8 +: 8]),
-        .data7(data_lin[(r_cnt*8+c_cnt+17)*8 +: 8]),
-        .data8(data_lin[(r_cnt*8+c_cnt+18)*8 +: 8]),
+        .data0(data0),
+        .data1(data1),
+        .data2(data2),
+        .data3(data3),
+        .data4(data4),
+        .data5(data5),
+        .data6(data6),
+        .data7(data7),
+        .data8(data8),
 
         .weight0(weight_lin[(1*9  )*8 +: 8]),
         .weight1(weight_lin[(1*9+1)*8 +: 8]),
@@ -115,15 +134,15 @@ module conv_module (
         .rst_n(rst_n),
         .cnt(cnt_3x3),
 
-        .data0(data_lin[(r_cnt*8+c_cnt   )*8 +: 8]),
-        .data1(data_lin[(r_cnt*8+c_cnt+1 )*8 +: 8]),
-        .data2(data_lin[(r_cnt*8+c_cnt+2 )*8 +: 8]),
-        .data3(data_lin[(r_cnt*8+c_cnt+8 )*8 +: 8]),
-        .data4(data_lin[(r_cnt*8+c_cnt+9 )*8 +: 8]),
-        .data5(data_lin[(r_cnt*8+c_cnt+10)*8 +: 8]),
-        .data6(data_lin[(r_cnt*8+c_cnt+16)*8 +: 8]),
-        .data7(data_lin[(r_cnt*8+c_cnt+17)*8 +: 8]),
-        .data8(data_lin[(r_cnt*8+c_cnt+18)*8 +: 8]),
+        .data0(data0),
+        .data1(data1),
+        .data2(data2),
+        .data3(data3),
+        .data4(data4),
+        .data5(data5),
+        .data6(data6),
+        .data7(data7),
+        .data8(data8),
 
         .weight0(weight_lin[(2*9  )*8 +: 8]),
         .weight1(weight_lin[(2*9+1)*8 +: 8]),

@@ -11,7 +11,6 @@ module conv_module (
 );
 
 
-    wire out_vld_3x3;
     reg [2:0] r_cnt,c_cnt; // max=6
     reg out_vld_reg;
     always @(posedge clk, negedge rst_n) begin
@@ -20,18 +19,15 @@ module conv_module (
             c_cnt <= 0;
         end
         else if(in_vld) begin
-            if(out_vld_3x3 == 1)begin
-                if(c_cnt == 5) begin
-                    c_cnt <= 0;
-                    if(r_cnt == 5)
-                        r_cnt <= 0;
-                    else
-                        r_cnt <= r_cnt + 1;
-                end
+            if(c_cnt == 5) begin
+                c_cnt <= 0;
+                if(r_cnt == 5)
+                    r_cnt <= 0;
                 else
-                    c_cnt <= c_cnt + 1;
+                    r_cnt <= r_cnt + 1;
             end
-            // else hold
+            else
+                c_cnt <= c_cnt + 1;
         end
         else begin
             r_cnt <= 0;
@@ -42,7 +38,7 @@ module conv_module (
         if(~rst_n)
             out_vld_reg <= 0;
         else begin
-            if(in_vld && r_cnt == 5 && c_cnt == 5 && out_vld_3x3 == 1)
+            if(in_vld && r_cnt == 5 && c_cnt == 5)
                 out_vld_reg <= 1;
             else if(in_vld)
                 out_vld_reg <= 0;
@@ -56,11 +52,7 @@ module conv_module (
     wire [7:0] ans_3x3_D1;
     wire [7:0] ans_3x3_D2;
     wire [7:0] ans_3x3_D3;
-    conv3x3 u_conv3x3_D1(
-        .clk(clk),
-        .rst_n(rst_n),
-        .cnt(cnt_3x3),
-
+    conv3x3_t1 u_conv3x3_t1_D1(
         .data0(data_lin[(r_cnt*8+c_cnt   )*8 +: 8]),
         .data1(data_lin[(r_cnt*8+c_cnt+1 )*8 +: 8]),
         .data2(data_lin[(r_cnt*8+c_cnt+2 )*8 +: 8]),
@@ -83,11 +75,7 @@ module conv_module (
 
         .ans(ans_3x3_D1)
     );
-    conv3x3 u_conv3x3_D2(
-        .clk(clk),
-        .rst_n(rst_n),
-        .cnt(cnt_3x3),
-
+    conv3x3_t1 u_conv3x3_t1_D2(
         .data0(data_lin[(r_cnt*8+c_cnt   )*8 +: 8]),
         .data1(data_lin[(r_cnt*8+c_cnt+1 )*8 +: 8]),
         .data2(data_lin[(r_cnt*8+c_cnt+2 )*8 +: 8]),
@@ -110,11 +98,7 @@ module conv_module (
 
         .ans(ans_3x3_D2)
     );
-    conv3x3 u_conv3x3_D3(
-        .clk(clk),
-        .rst_n(rst_n),
-        .cnt(cnt_3x3),
-
+    conv3x3_t1 u_conv3x3_t1_D3(
         .data0(data_lin[(r_cnt*8+c_cnt   )*8 +: 8]),
         .data1(data_lin[(r_cnt*8+c_cnt+1 )*8 +: 8]),
         .data2(data_lin[(r_cnt*8+c_cnt+2 )*8 +: 8]),
@@ -138,18 +122,11 @@ module conv_module (
         .ans(ans_3x3_D3)
     );
 
-    conv3x3_cnt u_conv3x3_cnt(
-        .clk(clk),
-        .rst_n(rst_n),
-        .in_vld(in_vld),
-        .cnt(cnt_3x3),
-        .out_vld(out_vld_3x3)
-    );
 
     always @(posedge clk, negedge rst_n) begin
         if(~rst_n)
             conv_lin <= 0;
-        else if(out_vld_3x3) begin
+        else if(in_vld) begin
             conv_lin[(0*6*6+r_cnt*6+c_cnt)*8 +: 8] <= ans_3x3_D1;
             conv_lin[(1*6*6+r_cnt*6+c_cnt)*8 +: 8] <= ans_3x3_D2;
             conv_lin[(2*6*6+r_cnt*6+c_cnt)*8 +: 8] <= ans_3x3_D3;
