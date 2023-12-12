@@ -1,4 +1,5 @@
-for i=1:100 % get 100 pictures
+% for i=1:100 % get 100 pictures
+i=5;
 %% open document
 fdata=fopen('./sample/data.txt','r');
 fweight=fopen('./sample/weight.txt','r');
@@ -69,4 +70,4 @@ fclose(fweight);
 fclose(foutput);
 
 
-end
+% end
