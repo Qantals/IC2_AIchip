@@ -23,6 +23,7 @@ module top (
     wire [19*8-1:0] data_mem;
     data_ram u_data_ram(
         .clk(clk),
+        .rst_n(rst_n),
         .wen(data_ram_en),
         .din(din),
         .dout(data_mem)
@@ -31,6 +32,7 @@ module top (
     wire [3*3*3*2*8-1:0] weight_mem;
     weight_ram u_weight_ram(
         .clk(clk),
+        .rst_n(rst_n),
         .wen(weight_ram_en),
         .din(din),
         .dout(weight_mem)

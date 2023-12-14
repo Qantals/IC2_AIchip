@@ -59,14 +59,18 @@ module top_tb;
         for(i_pic = 0; i_pic <= 99; i_pic = i_pic + 1) begin
             // i_pic = 4;
             // get in data
-            ram_en = 1;
-            mode = 0;
             for(index_data = 0; index_data <= 63; index_data = index_data + 1) begin
+                ram_en = 1;
+                mode = 0;
                 din = data_mem[index_data+i_pic*64];
                 @(posedge clk);
                 #1;
+                if({$random} % 2) begin
+                    ram_en = 0;
+                    @(posedge clk);
+                    #1;
+                end
             end
-            // ram_en = 0;
         end
     end
 

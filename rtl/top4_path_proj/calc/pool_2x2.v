@@ -2,6 +2,7 @@
 module pool_2x2(
     input clk,
     input rst_n,
+    input in_vld,
     // input [$clog2(67)-1:0] cnt,
     input [$clog2(69)-1:0] cnt,
     input signed [7:0] conv,
@@ -16,7 +17,7 @@ module pool_2x2(
             data3 <= 0; data4 <= 0; data5 <= 0;
             data6 <= 0; data7 <= 0; data8 <= 0;
         end
-        else begin
+        else if(in_vld) begin
             case (cnt)
                 // 20: data0 <= conv;
                 // 21,28,29: data0 <= (conv > data0) ? conv : data0;

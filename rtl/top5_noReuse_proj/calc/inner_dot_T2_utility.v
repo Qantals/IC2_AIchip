@@ -4,6 +4,7 @@ module inner_dot_T2_utility #(
 )(
     input clk,
     input rst_n,
+    input in_vld,
     input signed [7:0] data0,
     input signed [7:0] data1,
     input signed [7:0] data2,
@@ -58,7 +59,7 @@ module inner_dot_T2_utility #(
             product7_reg <= 0;
             product8_reg <= 0;
         end
-        else begin
+        else if(in_vld)begin
             product0_reg <= product0;
             product1_reg <= product1;
             product2_reg <= product2;

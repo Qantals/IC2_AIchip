@@ -9,17 +9,33 @@ module control (
     output reg out_data_flag
 );
 
+    reg [2:0] cnt_side;
     always @(posedge clk, negedge rst_n) begin
         if(~rst_n)
             cnt <= 0;
-        else if(in_vld) begin
-            // if(cnt == 67)
-            if(cnt == 69)
-                // cnt <= 4;
-                cnt <= 6;
+        else if(cnt == 69) begin
+            if(in_vld)
+                cnt <= cnt_side + 1;
             else
-                cnt <= cnt + 1;
+                cnt <= {4'b0000, cnt_side};
         end
+        else if(cnt >= 64)
+            cnt <= cnt + 1;
+        else if(in_vld)
+            cnt <= cnt + 1;
+    end
+
+    always @(posedge clk, negedge rst_n) begin
+        if(~rst_n)
+            cnt_side <= 0;
+        else if(cnt >= 64) begin
+            if(in_vld)
+                cnt_side <= cnt_side + 1;
+            else
+                cnt_side <= cnt_side;
+        end
+        else
+            cnt_side <= 0;
     end
 
     always @(posedge clk, negedge rst_n) begin

@@ -4,6 +4,7 @@ module inner_dot_sel #(
 )(
     input clk,
     input rst_n,
+    input in_vld,
     // input [$clog2(67)-1:0] cnt,
     input [$clog2(69)-1:0] cnt,
 
@@ -99,6 +100,7 @@ module inner_dot_sel #(
     ) u_inner_dot_D1(
         .clk(clk),
         .rst_n(rst_n),
+        .in_vld(in_vld),
         .data0(data0),
         .data1(data1),
         .data2(data2),

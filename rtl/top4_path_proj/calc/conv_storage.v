@@ -2,6 +2,7 @@
 module conv_storage (
     input clk,
     input rst_n,
+    input in_vld,
     // input [$clog2(67)-1:0] cnt,
     input [$clog2(69)-1:0] cnt,
     input [7:0] ans_D1,
@@ -25,12 +26,12 @@ module conv_storage (
         //         (cnt>=43 && cnt<=48) ||
         //         (cnt>=51 && cnt<=56) ||
         //         (cnt>=59 && cnt<=64)) begin
-        else if((cnt>=20 && cnt<=25) ||
+        else if(((cnt>=20 && cnt<=25) ||
                 (cnt>=28 && cnt<=33) ||
                 (cnt>=36 && cnt<=41) ||
                 (cnt>=44 && cnt<=49) ||
                 (cnt>=52 && cnt<=57) ||
-                (cnt>=60 && cnt<=65)) begin
+                (cnt>=60 && cnt<=65)) && in_vld) begin
             conv_D1_reg <= ans_D1;
             conv_D2_reg <= ans_D2;
             conv_D3_reg <= ans_D3;

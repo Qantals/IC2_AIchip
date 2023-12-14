@@ -46,6 +46,9 @@ module top (
         .out_data_flag(out_data_flag)
     );
 
+    wire in_vld;
+    assign in_vld = (data_ram_en || cnt >= 64);
+
     wire [3*3*3*8-1:0] pool_lin;
 
     // dot module 
@@ -58,6 +61,7 @@ module top (
     ) u_inner_dot_sel_D1 (
         .clk(clk),
         .rst_n(rst_n),
+        .in_vld(in_vld),
         .cnt(cnt),
 
         .data0_sel0(data_mem[ 0*8 +: 8]),
@@ -107,6 +111,7 @@ module top (
     ) u_inner_dot_sel_D2 (
         .clk(clk),
         .rst_n(rst_n),
+        .in_vld(in_vld),
         .cnt(cnt),
 
         .data0_sel0(data_mem[ 0*8 +: 8]),
@@ -156,6 +161,7 @@ module top (
     ) u_inner_dot_sel_D3 (
         .clk(clk),
         .rst_n(rst_n),
+        .in_vld(in_vld),
         .cnt(cnt),
 
         .data0_sel0(data_mem[ 0*8 +: 8]),
@@ -237,6 +243,7 @@ module top (
     conv_storage u_conv_storage(
         .clk(clk),
         .rst_n(rst_n),
+        .in_vld(in_vld),
         .cnt(cnt),
         .ans_D1(compress_D1),
         .ans_D2(compress_D2),
@@ -249,6 +256,7 @@ module top (
     pool_module u_pool_module(
         .clk(clk),
         .rst_n(rst_n),
+        .in_vld(in_vld),
         .cnt(cnt),
         .conv_D1(conv_D1),
         .conv_D2(conv_D2),

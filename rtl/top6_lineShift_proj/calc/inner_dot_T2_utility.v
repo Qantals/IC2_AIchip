@@ -38,36 +38,12 @@ module inner_dot_T2_utility #(
     assign product8 = data8 * weight8;
 
     // registers
-    reg signed [15:0] product0_reg;
-    reg signed [15:0] product1_reg;
-    reg signed [15:0] product2_reg;
-    reg signed [15:0] product3_reg;
-    reg signed [15:0] product4_reg;
-    reg signed [15:0] product5_reg;
-    reg signed [15:0] product6_reg;
-    reg signed [15:0] product7_reg;
     reg signed [15:0] product8_reg;
     always @(posedge clk, negedge rst_n) begin
         if(~rst_n) begin
-            product0_reg <= 0;
-            product1_reg <= 0;
-            product2_reg <= 0;
-            product3_reg <= 0;
-            product4_reg <= 0;
-            product5_reg <= 0;
-            product6_reg <= 0;
-            product7_reg <= 0;
             product8_reg <= 0;
         end
-        else if(in_vld) begin
-            product0_reg <= product0;
-            product1_reg <= product1;
-            product2_reg <= product2;
-            product3_reg <= product3;
-            product4_reg <= product4;
-            product5_reg <= product5;
-            product6_reg <= product6;
-            product7_reg <= product7;
+        else if(in_vld)begin
             product8_reg <= product8;
         end
     end
@@ -75,14 +51,35 @@ module inner_dot_T2_utility #(
 
 
     wire signed [SUM_WIDTH-1:0] sum0,sum1,sum2,sum3;
-    assign sum0 = product0_reg + product1_reg;
-    assign sum1 = product2_reg + product3_reg;
-    assign sum2 = product4_reg + product5_reg;
-    assign sum3 = product6_reg + product7_reg;
+    assign sum0 = product0 + product1;
+    assign sum1 = product2 + product3;
+    assign sum2 = product4 + product5;
+    assign sum3 = product6 + product7;
+
+    // registers
+    reg [SUM_WIDTH-1:0] sum0_reg;
+    reg [SUM_WIDTH-1:0] sum1_reg;
+    reg [SUM_WIDTH-1:0] sum2_reg;
+    reg [SUM_WIDTH-1:0] sum3_reg;
+    always @(posedge clk, negedge rst_n) begin
+        if(~rst_n) begin
+            sum0_reg <= 0;
+            sum1_reg <= 0;
+            sum2_reg <= 0;
+            sum3_reg <= 0;
+        end
+        else if(in_vld) begin
+            sum0_reg <= sum0;
+            sum1_reg <= sum1;
+            sum2_reg <= sum2;
+            sum3_reg <= sum3;
+        end
+    end
+
 
     wire signed [SUM_WIDTH-1:0] sum00,sum11;
-    assign sum00 = sum0 + sum1;
-    assign sum11 = sum2 + sum3;
+    assign sum00 = sum0_reg + sum1_reg;
+    assign sum11 = sum2_reg + sum3_reg;
 
     wire signed [SUM_WIDTH-1:0] sum000;
     assign sum000 = sum00 + sum11;
