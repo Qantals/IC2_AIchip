@@ -22,7 +22,7 @@ module top_tb;
 
     initial begin
         clk = 0;
-        forever #5 clk = ~clk;
+        forever #10 clk = ~clk;
     end
 
     reg [7:0] data_mem [8*8*1*100-1:0];
@@ -33,9 +33,12 @@ module top_tb;
     integer i_check;
     // integer cnt_clk;
     initial begin
-        $readmemb("../sample_100/data.txt",data_mem);
-        $readmemb("../sample_100/weight.txt",weight_mem);
-        $readmemb("../sample_100/output.txt",output_mem);
+        // $readmemb("../sample_100/data.txt",data_mem);
+        // $readmemb("../sample_100/weight.txt",weight_mem);
+        // $readmemb("../sample_100/output.txt",output_mem);
+        $readmemb("D:/IC2/primaAI_check/git_share/sample_100/data.txt",data_mem);
+        $readmemb("D:/IC2/primaAI_check/git_share/sample_100/weight.txt",weight_mem);
+        $readmemb("D:/IC2/primaAI_check/git_share/sample_100/output.txt",output_mem);
     end
 
     initial begin
@@ -44,7 +47,7 @@ module top_tb;
         mode = 0;
         din = 0;
         ram_en = 0;
-        #6 rst_n = 1;
+        #11 rst_n = 1;
 
         // get in weight
         ram_en = 1;
@@ -65,11 +68,11 @@ module top_tb;
                 din = data_mem[index_data+i_pic*64];
                 @(posedge clk);
                 #1;
-                if({$random} % 2) begin
-                    ram_en = 0;
-                    @(posedge clk);
-                    #1;
-                end
+                // if({$random} % 2) begin
+                //     ram_en = 0;
+                //     @(posedge clk);
+                //     #1;
+                // end
             end
         end
     end
@@ -79,7 +82,7 @@ module top_tb;
         while(i_check <= 99) begin
             // calculate
             @(posedge out_data_flag);
-            #1;
+            #10;
             // while(out_data_flag != 1) begin
             //     @(posedge clk);
             //     #1;
