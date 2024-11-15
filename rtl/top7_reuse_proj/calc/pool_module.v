@@ -4,7 +4,7 @@ module pool_module (
     input rst_n,
     input in_vld,
     // input [$clog2(67)-1:0] cnt,
-    input [$clog2(69)-1:0] cnt,
+    input [$clog2(68)-1:0] cnt,
     input [7:0] conv_D1,
     input [7:0] conv_D2,
     input [7:0] conv_D3,

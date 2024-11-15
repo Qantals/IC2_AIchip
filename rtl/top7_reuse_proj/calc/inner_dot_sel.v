@@ -6,7 +6,7 @@ module inner_dot_sel #(
     input rst_n,
     input in_vld,
     // input [$clog2(67)-1:0] cnt,
-    input [$clog2(69)-1:0] cnt,
+    input [$clog2(68)-1:0] cnt,
 
     input [7:0] data0_conv,
     input [7:0] data1_conv,

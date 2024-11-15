@@ -4,7 +4,7 @@ module conv_storage (
     input rst_n,
     input in_vld,
     // input [$clog2(67)-1:0] cnt,
-    input [$clog2(69)-1:0] cnt,
+    input [$clog2(68)-1:0] cnt,
     input [7:0] ans_D1,
     input [7:0] ans_D2,
     input [7:0] ans_D3,

@@ -12,12 +12,12 @@ module data_ram (
     always @(posedge clk, negedge rst_n) begin
         if(~rst_n) begin
             for(k = 0; k <= 18; k = k + 1)
-                mem[k] = 0;
+                mem[k] <= 0;
         end
         else if(wen) begin
             for(j = 0; j <= 17; j = j + 1)
-                mem[j] = mem[j + 1];   // scan in high address, equals to right shift
-            mem[18] = din;
+                mem[j] <= mem[j + 1];   // scan in high address, equals to right shift
+            mem[18] <= din;
         end
     end
 

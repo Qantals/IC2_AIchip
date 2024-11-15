@@ -5,7 +5,7 @@ module control (
     input in_vld,
 
     // output reg [$clog2(67)-1:0] cnt,
-    output reg [$clog2(69)-1:0] cnt,
+    output reg [$clog2(68)-1:0] cnt,
     output reg out_data_flag
 );
 
@@ -13,7 +13,7 @@ module control (
     always @(posedge clk, negedge rst_n) begin
         if(~rst_n)
             cnt <= 0;
-        else if(cnt == 69) begin
+        else if(cnt == 68) begin
             if(in_vld)
                 cnt <= cnt_side + 1;
             else
@@ -42,7 +42,7 @@ module control (
         if(~rst_n)
             out_data_flag <= 0;
         // else if(cnt == 67)
-        else if(cnt == 69)
+        else if(cnt == 68)
             out_data_flag <= 1;
         else
             out_data_flag <= 0;

@@ -4,7 +4,7 @@ module connect_module (
     input rst_n,
     input in_vld,
     // input [$clog2(67)-1:0] cnt,
-    input [$clog2(69)-1:0] cnt,
+    input [$clog2(68)-1:0] cnt,
 
     input signed [20:0] dot_D1,
     input signed [20:0] dot_D2,
@@ -47,7 +47,7 @@ module connect_module (
         if(~rst_n)
             ans_reg <= 0;
         // else if(cnt == 67)
-        else if(cnt == 69)
+        else if(cnt == 68)
             ans_reg <= compress;
     end
 

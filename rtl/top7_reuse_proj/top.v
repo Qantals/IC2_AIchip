@@ -39,7 +39,7 @@ module top (
     );
 
     // wire [$clog2(67)-1:0] cnt;
-    wire [$clog2(69)-1:0] cnt;
+    wire [$clog2(68)-1:0] cnt;
     control u_control(
         .clk(clk),
         .rst_n(rst_n),
@@ -195,7 +195,7 @@ module top (
     wire [20:0] sum_accum_D1;
     wire [20:0] sum_all;
     // assign sum_accum_D1 = (cnt == 67) ? (sum_all) : dot_D1;
-    assign sum_accum_D1 = (cnt == 69) ? (sum_all) : dot_D1;
+    assign sum_accum_D1 = (cnt == 68) ? (sum_all) : dot_D1;
 
     wire [7:0] compress_D1;
     wire [7:0] compress_D2;
